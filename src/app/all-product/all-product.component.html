@@ -1,0 +1,53 @@
+<app-header></app-header>
+
+<header class="mb-5 w-100">
+  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="p-3 carousel-item active">
+        <img
+          src="https://png.pngtree.com/png-clipart/20230526/original/pngtree-sale-landing-page-banner-template-promo-shopping-discount-banner-png-image_9170587.png"
+          class="d-block w-100" alt="no image" height="500px" />
+      </div>
+      <div class="p-3 carousel-item">
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/008/913/876/non_2x/best-deal-banner-template-with-shopping-bag-discount-sale-store-promotion-vector.jpg"
+          class="d-block w-100" alt="no image" height="500px" />
+      </div>
+      <div class="p-3 carousel-item">
+        <img
+          src="https://img.pikbest.com/wp/202408/shopping-cart-illustration-enhance-your-black-friday-experience-with-a-smartphone-and-eye-catching-banner-for-promotion-advertisement-sale-or-product-3d_9851253.jpg!sw800"
+          class="d-block w-100" alt="no image" height="500px" />
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</header>
+
+<div class="container-fluid mt-5 w-100">
+  <div class="row w-100">
+    <div *ngFor="let product of allProduct" class="col-md-3 p-4">
+      <div class="card shadow p-3 border-0 rounded-0 w-100">
+        <a routerLink="/view-product/{{product.id}}" style="text-decoration: none;">
+          <img [src]="product.image" height="200px" width="100%" class="card-img-top" alt="..." />
+        </a>
+        <div class="card-body ">
+          <h5 class="card-title">{{product.title.slice(0,25)}}...</h5>
+          <p class="card-text text-center fw-bold">Price : {{product.price}}</p>
+          <div class="d-flex justify-content-between">
+            <a (click)="addToWishList(product)" href="#" class="btn btn-outline-success"><i class="fa-solid fa-heart"></i></a>
+            <a (click)="addToCart(product)" class="btn btn-outline-danger"><i class="fa-solid fa-cart-shopping"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+  <h1 class="text-center text-danger mt-5">CART</h1>
+  <!-- item in cart  -->
+  <div *ngIf="allProducts.length>0" class="row mt-5">
+    <div class="col-md-1"></div>
+    <div class="col-md-6">
+      <table class="table table-bordered mt-5 shadow">
+        <thead>
+          <tr>
+            <th class="bg-secondary p-3 text-light text-center">Sl:no</th>
+            <th class="bg-secondary p-3 text-light text-center">Title</th>
+            <th class="bg-secondary p-3 text-light text-center">Image</th>
+            <th class="bg-secondary p-3 text-light text-center">Price</th>
+            <th class="bg-secondary p-3 text-light text-center">no of Items</th>
+            <th class="bg-secondary p-3 text-light text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of allProducts">
+            <td class="align-middle text-center">{{product.id}}</td>
+            <td class="align-middle text-center">{{product.title.slice(0,25)}}...</td>
+            <td>
+              <img
+                routerLink="/view-product/{{product.id}}"
+                [src]="product.image"
+                alt="no image" height="150px" width="150px" />
+            </td>
+            <td class="align-middle text-center">$ {{product.grandTotal}}</td>
+            <td class="d-flex border-0 justify-content-center align-items-center pt-5 mt-2">
+              <button (click)="decrementCarItem(product._id)" class="btn"><i class="fa-solid fa-minus"></i></button>
+              <input type="text" readonly [value]="product.quantity" class="form-control w-25" />
+              <button (click)="incrementCarItem(product._id)" class="btn"><i class="fa-solid fa-plus"></i></button>
+            </td>
+            <td class="text-center align-middle">
+              <button (click)="deleteCartItem(product._id)" class="btn btn-danger">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-center my-5">
+        <button routerLink="/" class="btn btn-outline-success me-1">Add more item</button>
+        <button class="btn btn-outline-danger ms-1">empty cart</button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="shadow p-4 mt-5">
+        <h3 class="text-center">Cart Summery</h3>
+        <hr>
+        <h4>Total no of products: {{allProducts.length}}</h4>
+        <h4>Grand Total: $ {{grandTotal}}</h4>
+        <a routerLink="/checkout"><button class="btn btn-success w-100">CheckOut</button></a>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+
+  <!-- no item in wishlist  -->
+  <div *ngIf="allProducts.length==0" class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 d-flex justify-content-center align-items-center flex-column">
+      <img src="https://www.adasglobal.com/img/empty-cart.png" alt="no image" width="100%" />
+      <a routerLink="/">
+        <button class="btn btn-success mb-4 shadow">Add item to cart</button>
+      </a>
+    </div>
+    <div class="col-md-3"></div>
+    
+  </div>
+</div>
+
+<div *ngIf="!token" class="container-fluid py-5">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 d-flex justify-content-center align-items-center flex-column">
+      <img src="https://cdn-icons-gif.flaticon.com/8717/8717908.gif" alt="no image">
+      <h3>Please <a routerLink="/login">Login</a> to view your cart</h3>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>

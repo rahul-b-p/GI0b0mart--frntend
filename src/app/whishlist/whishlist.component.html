@@ -1,0 +1,63 @@
+<app-header></app-header>
+
+<div *ngIf="token" class="container-fluid pt-5">
+  <h1 class="mt-5 text-center text-danger">WISHLIST</h1>
+  <div class="row">
+    <!-- item in wishlist  -->
+    <div *ngFor="let product of allProducts"  class="col-md-3 p-4 mb-5">
+      <div  class="card shadow p-3 border-0 rounded-0" style="height: 500px;" style="width: 100%">
+        <div routerLink="/view-product/{{product.id}}">
+          <img
+            [src]="product.image"
+            class="card-img-top"
+            alt="..."
+            height="200px" width="100%"
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{product.title.slice(0,25)}}...</h5>
+          <p class="card-text text-center fw-bold">Price : {{product.price}}</p>
+          <div class="d-flex justify-content-between">
+            <a (click)="addToCart(product)" class="btn btn-outline-success"
+              ><i class="fa-solid fa-cart-shopping"></i
+            ></a>
+            <a (click)="removeWishlidstItem(product._id)" class="btn btn-outline-danger"
+              ><i class="fa-solid fa-trash-can"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- no item in wishlist  -->
+    <div *ngIf="allProducts.length==0" class="row">
+      <div class="col-md-3"></div>
+      <div
+        class="col-md-6 d-flex justify-content-center align-items-center flex-column"
+      >
+        <img
+          src="https://cdn.dribbble.com/users/530801/screenshots/2357094/present.gif"
+          alt="no image"
+          width="100%"
+        />
+        <a routerLink="/">
+          <button class="btn btn-success mb-4 shadow">
+            Add item to wishlist
+          </button>
+        </a>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!token" class="container-fluid py-5">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 d-flex justify-content-center align-items-center flex-column">
+      <img src="https://cdn-icons-gif.flaticon.com/8717/8717908.gif" alt="no image">
+      <h3>Please <a routerLink="/login">Login</a> to view your cart</h3>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
